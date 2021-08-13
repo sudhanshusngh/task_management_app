@@ -1,23 +1,24 @@
-<%= link_to 'Back', projects_path, class: 'btn btn-secondary mb-3' %>
+<%= link_to 'Back', tasks_path, class: 'btn btn-secondary mb-3' %>
 <div class="card">
   <div class="card-body">
     <h2 class='card-title d-flex justify-content-between mb-4'>
-      <span><%= @project.name %></span>
+      <% if current_user.email == @task.created_by || current_user.email == @task.assign_to %>
+      <span><%= @task.name %></span>
       <div>
-        <%= link_to 'Edit', edit_project_path(@project), class: 'btn btn-light' %>
-        <%= link_to 'Destroy', @project, method: :delete, class: 'btn btn-dark', data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Edit', edit_task_path(@task), class: 'btn btn-light' if current_user.email == @task.created_by %>
+        <%= link_to 'Destroy', @task, method: :delete, class: 'btn btn-dark', data: { confirm: 'Are you sure?' } if current_user.email == @task.created_by %>
       </div>
     </h2>
 
     <div class="mb-4">
-      <h6>Add task</h6>
-      <%= form_for([@task.project, @task]) do |f| %>
-        <% if @task.errors.any? %>
+      <h6>Add work</h6>
+      <%= form_for([@work.task, @work]) do |f| %>
+        <% if @work.errors.any? %>
           <div id="error_explanation">
-            <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+            <h2><%= pluralize(@work.errors.count, "error") %> prohibited this work from being saved:</h2>
 
             <ul>
-            <% @task.errors.full_messages.each do |msg| %>
+            <% @work.errors.full_messages.each do |msg| %>
               <li><%= msg %></li>
             <% end %>
             </ul>
@@ -25,7 +26,7 @@
         <% end %>
         <%= f.hidden_field :status, value: 'not-started' %>
         <div class="input-group">
-          <%= f.text_field :name, class: 'form-control', placeholder: 'Enter task name...' %>
+          <%= f.text_field :name, class: 'form-control', placeholder: 'Enter work name...' %>
           <div class="input-group-append">
             <%= f.submit class: 'btn btn-primary' %>
           </div>
@@ -33,26 +34,61 @@
       <% end %>
     </div>
 
-    <h4>Tasks</h4>
-    <% @project.tasks.each do |task| %>
-      <% if task.persisted? %>
+    <h4>Works</h4>
+    <% @task.works.each do |work| %>
+      <% if work.persisted? %>
         <div class="card mb-3">
           <div class="card-body">
             <div class="d-flex justify-content-between">
-              <span class="badge badge-<%= task.badge_color %> mb-3"><%= task.status %></span>
+              <span class="badge badge-<%= work.badge_color %> mb-3"><%= work.status %></span>
               <div>
-                <%= link_to 'Edit', edit_project_task_path(task.project, task), class: 'btn btn-light btn-sm' %>
-                <%= link_to 'Destroy', [task.project, task], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-dark btn-sm' %>
+                <%= link_to 'Edit', edit_task_work_path(work.task, work), class: 'btn btn-light btn-sm' if current_user.email == @task.created_by %>
+                <%= link_to 'Destroy', [work.task, work], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-dark btn-sm' if current_user.email == @task.created_by %>
               </div>
             </div>
             <h5 class='card-title mb-2'>
-              <span><%= task.name %></span>
+              <span><%= work.name %></span>
             </h5>
-            <p><%= task.description %></p>
+            <p><%= work.description %></p>
           </div>
         </div>
       <% end %>
-    <% end%>
+    <% end %>
+    <% end %>
 
+
+    <% if current_user.email == @task.assign_to %>
+      <span><%= @task.name %></span>
+      <div>
+        <%#= link_to 'Edit', edit_task_path(@task), class: 'btn btn-light'  %>
+        
+      </div>
+    <% end %>
+    </h2>
+
+    
+
+    <h4>Works</h4>
+    <% @task.works.each do |work| %>
+      <% if work.persisted? %>
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <span class="badge badge-<%= work.badge_color %> mb-3"><%= work.status %></span>
+              <div>
+                <%= link_to 'Edit', edit_task_work_path(work.task, work), class: 'btn btn-light btn-sm' if current_user.email == @task.assign_to %>
+                
+              </div>
+            </div>
+            <h5 class='card-title mb-2'>
+              <span><%= work.name %></span>
+            </h5>
+            <p><%= work.description %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+  
   </div>
 </div>

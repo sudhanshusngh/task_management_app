@@ -4,7 +4,7 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = current_user.tasks
+    @tasks = current_user.tasks.paginate(page: params[:page], per_page: 2)
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -66,6 +66,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:name, :description)
+      params.require(:task).permit(:name, :description, :created_by, :assign_to)
     end
 end

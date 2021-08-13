@@ -1,0 +1,30 @@
+<div id="logreg-forms">
+<h1>Signup</h1>
+
+
+<%= form_for users_new_path do |f| %>
+
+    <div class="form-group">
+        <%= f.label :name %><br>
+        <%= f.text_field :name, class: "form-control" %><br>
+    </div>
+    
+    <div class="form-group">
+        <%= f.label :email %><br>
+        <%= f.email_field :email, class: "form-control" %><br>
+    </div>
+    
+    <div class="form-group">
+        <%= f.label :password %><br>
+        <%= f.password_field :password,class: "form-control" %><br>
+    </div>
+
+    <div class="form-group form-check">
+        <%= f.label :manager %><br>
+        <%= f.check_box :role, class: "form-check-label" %><br>
+    </div>
+    <div class="actions">
+        <%= f.submit class: "btn btn-primary" %>
+    </div>
+<% end %>
+</div>

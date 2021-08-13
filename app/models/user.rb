@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_many :tasks
+
+  devise :omniauthable, :omniauth_providers => [:facebook]
 end
