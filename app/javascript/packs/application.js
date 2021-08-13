@@ -9,6 +9,7 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 //= require jquery
 //= require jquery_ujs
+//= require jquery.remotipart
 import "../stylesheets/application"
 
 Rails.start()

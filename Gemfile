@@ -38,7 +38,13 @@ gem 'will_paginate'
 
 gem 'omniauth-facebook'
 
-gem 'activerecord-session_store'
+#gem 'activerecord-session_store'
+
+gem 'carrierwave'
+
+gem 'mini_magick'
+
+gem 'remotipart'
 
 gem 'jquery-rails'
 

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :images
   #resources :sessions, except: :new
   get 'users/index'
   #post 'users/sign_out' to:
