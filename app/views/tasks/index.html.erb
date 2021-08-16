@@ -1,4 +1,4 @@
-<% if current_user %>
+<% if !current_user.nil? %>
 <div class="card">
   <div class="card-body">
     <h2 class='card-title d-flex justify-content-between mb-4'>
@@ -11,7 +11,7 @@
       <%= link_to task, class: 'text-decoration-none' do %>
         <div class="card project-card mb-3">
           <div class="card-body">
-          <% if current_user.email == (task.created_by || task.assign_to) %>
+          <% if current_user.email == task.created_by %>
             <div class="mb-3">
               <span class="badge badge-<%= task.badge_color %>">
                 <%= task.status %>
@@ -25,6 +25,7 @@
             </div>
             <h5 class='card-title text-dark'><b><%= task.name %></b></h5>
             <p class='text-secondary'><%= task.description %></p>
+<!--          <%#Not working%> 
           <%if current_user.role%>
             <div class="dropdown" style="display:inline-block;">
             <button id="assign_to-select-btn" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Assign to
@@ -33,11 +34,12 @@
             <% @users = User.all %>
             <% @users.each do |user| %>
               <%= select_tag(:assign_to, user.email) %>
-              <% task.assign_to = :assign_to %>
+              <%# task.assign_to = :assign_to %>
             <% end %>
         </ul>
+        
 </div>
-        <% end %>
+        <% end %> !-->
     <%# @users = @users.to_a %>
     <%# @users.each do |user| %>
     <%#= select_tag(task.assign_to, '/users/index') %>
@@ -46,7 +48,7 @@
   </div>
 </div>
 
-          <% elsif current_user.email == (task.assign_to || task.created_by) %>
+          <% elsif task.assign_to == resource.email %>
             <div class="mb-3">
               <span class="badge badge-<%= task.badge_color %>">
                 <%= task.status %>
