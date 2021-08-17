@@ -3,8 +3,12 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
 
   # GET /tasks or /tasks.json
-  def index
-    @tasks = Task.all
+  def index 
+    if current_user.tasks.nil?
+      @tasks = Task.all.paginate(page: params[:page], per_page: 2)
+    else
+      @tasks = current_user.tasks.paginate(page: params[:page], per_page: 2)
+    end
   end
 
   # GET /tasks/1 or /tasks/1.json
