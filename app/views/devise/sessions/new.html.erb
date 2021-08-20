@@ -1,6 +1,6 @@
 <div id="logreg-forms">
 
-<h2>Log in</h2>
+<h2>Log in</h2>:
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v11.0&appId=340606447775153&autoLogAppEvents=1" nonce="Z07h4srO"></script>
 <!--<script>
@@ -28,7 +28,7 @@
 
 <% unless current_user %>   
   <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="true"></div>
-
+  <%= button_to "Sign in with google", 'auth/google_oauth2' %>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-group">

@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   #devise_for :users
   root to: "tasks#index"
 
-  post '/auth/:provider/callback', to: 'sessions#create' 
+  post 'users/auth/:provider/callback', to: 'devise/sessions#create'
+  get 'users/auth/:provider/callback', to: 'devise/sessions#create' 
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 

@@ -48,7 +48,14 @@ gem 'remotipart'
 
 gem 'jquery-rails'
 
+gem 'omniauth'
+
+gem 'omniauth-rails_csrf_protection'
+
+gem 'omniauth-google-oauth2'
+
 group :development, :test do
+  gem  'dotenv-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'sqlite3', '~> 1.4'

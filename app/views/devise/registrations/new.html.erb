@@ -3,8 +3,8 @@
 <h2>Sign up</h2>
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v11.0&appId=340606447775153&autoLogAppEvents=1" nonce="Z07h4srO"></script>
-
-<%= link_to "Register with Facebook", user_facebook_omniauth_authorize_path %>
+<%= button_to "Register with google", 'auth/google_oauth2' %>
+<%#= link_to "Register with Facebook", user_facebook_omniauth_authorize_path %>
 
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
